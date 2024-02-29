@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rough</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+      }
+      .bg {
+        height: 100vh;
+        width: 100vw;
+        object-fit: cover;
+        z-index: -1;
+        position: absolute;
+        display: block;
+        background-color: #ffffff;
+        background-image: url("https://images.pexels.com/photos/2457284/pexels-photo-2457284.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-size: 100% 100%;
+      }
+      .blur {
+        z-index: 1;
+        height: 80vh;
+        width: 40vw;
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(2px);
+        color: aliceblue;
+        border: 2px solid;
+        border-radius: 15px;
+      }
+      .center {
+        margin-top: 10vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .blur h1 {
+        text-align: center;
+        margin-top: 10px;
+      }
+      #todoInput {
+        margin-bottom: 10px;
+      }
+      #todoList {
+        list-style-type: none;
+        padding: 0;
+      }
+      #todoList li {
+        margin-bottom: 5px;
+      }
+      .deleteButton {
+        margin-left: 10px;
+        width: 20px;
+        height: 20px;
+        color: aliceblue;
+        border: 2px solid aliceblue;
+        cursor: pointer;
+        background-color: red;
+        border-radius: 55px;
+      }
+      .input {
+        display: flex;
+        flex-direction: column-reverse;
+        position: relative;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding-top: 1.5rem;
+        & + .input {
+          margin-top: 1.5rem;
+        }
+      }
+
+      .input-label {
+        color: #8597a3;
+        position: absolute;
+        top: 1.5rem;
+        transition: 0.25s ease;
+      }
+
+      .input-field {
+        border: 0;
+        z-index: 1;
+        background-color: transparent;
+        border-bottom: 2px solid #eee;
+        font: inherit;
+        padding: 2rem;
+        font-size: 1.125rem;
+        padding: 0.25rem 0;
+        &:focus,
+        &:valid {
+          outline: 0;
+          border-bottom-color: #6658d3;
+          & + .input-label {
+            color: #6658d3;
+            transform: translateY(-1.5rem);
+          }
+        }
+      }
+
+      .action {
+        margin-top: 2rem;
+      }
+
+      .action-button {
+        font: inherit;
+        font-size: 1.25rem;
+        padding: 1em;
+        width: 60%;
+        font-weight: 500;
+        background-color: #6658d3;
+        border-radius: 6px;
+        color: #fff;
+        border: 0;
+        &:focus {
+          outline: 0;
+        }
+      }
+
+      /* CSS */
+      .button-29 {
+        align-items: center;
+        appearance: none;
+        background-image: radial-gradient(
+          100% 100% at 100% 0,
+          #5adaff 0,
+          #5468ff 100%
+        );
+        border: 0;
+        border-radius: 6px;
+        box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+          rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
+          rgba(58, 65, 111, 0.5) 0 -3px 0 inset;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        font-family: "JetBrains Mono", monospace;
+        height: 48px;
+        justify-content: center;
+        line-height: 1;
+        list-style: none;
+        overflow: hidden;
+        padding-left: 16px;
+        padding-right: 16px;
+        position: relative;
+        text-align: left;
+        text-decoration: none;
+        transition: box-shadow 0.15s, transform 0.15s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        will-change: box-shadow, transform;
+        font-size: 18px;
+      }
+
+      .button-29:focus {
+        box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+          rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+      }
+
+      .button-29:hover {
+        box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+          rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+        transform: translateY(-2px);
+      }
+
+      .button-29:active {
+        box-shadow: #3c4fe0 0 3px 7px inset;
+        transform: translateY(2px);
+      }
+      .btn {
+        width: 100%;
+        height: 10%;
+        margin-top: 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .lst {
+        margin-top: 5%;
+        margin-bottom: 5%;
+        padding: 2.5%;
+        width: fit-content;
+        border-radius: 12px;
+        border: 2px solid #454545a7;
+        height: fit-content;
+        background-color: transparent;
+        text-align: center;
+        /* color: rgb(43, 39, 39); */
+        color: aliceblue;
+      }
+      .listDiv {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      @media (min-width: 170px) {
+        .blur{
+            width: 75vw;
+            height: 70vh;
+        }
+      }
+      @media (min-width: 576px) {
+      }
+      @media (min-width: 768px) {
+        .blur{
+            width: 40vw;
+            height: 80vh;
+        }
+      }
+      @media (min-width: 992px) {
+      }
+      @media (min-width: 1200px) {
+      }
+      @media (min-width: 1400px) {
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg">
+      <!-- <img src="https://images.pexels.com/photos/1629236/pexels-photo-1629236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="BgImg"> -->
+    </div>
+    <div class="center">
+      <div class="blur">
+        <h1>Todo List</h1>
+        <div class="action">
+          <div class="input">
+            <input type="text" class="input-field" id="todoInput" required />
+            <label class="input-label">Enter Your Todo</label>
+          </div>
+          <div class="btn">
+            <button onclick="addTodo()" class="button-29" role="button">
+              Add Todo
+            </button>
+          </div>
+        </div>
+        <div class="listDiv">
+          <div class="lst">
+            <ul id="todoList"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let todos = [];
+
+    function loadTodos() {
+      const todosJSON = localStorage.getItem("todos");
+      if (todosJSON !== null) {
+        todos = JSON.parse(todosJSON);
+        displayTodos();
+      }
+    }
+
+    function saveTodos() {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
+
+    function displayTodos() {
+      const todoList = document.getElementById("todoList");
+      todoList.innerHTML = "";
+      todos.forEach((todo, index) => {
+        const li = document.createElement("li");
+        li.textContent = `${index + 1}. ${todo}`;
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "X";
+        deleteButton.className = "deleteButton";
+        deleteButton.onclick = function () {
+          removeTodo(index);
+        };
+        li.appendChild(deleteButton);
+        todoList.appendChild(li);
+      });
+      saveTodos();
+    }
+
+    function addTodo() {
+      const todoInput = document.getElementById("todoInput");
+      const todoText = todoInput.value.trim();
+
+      if (todoText !== "" && todos.length < 5) {
+        todos.push(todoText);
+        todoInput.value = "";
+        displayTodos();
+        // alert("ToDo Added Successfully!");
+        Swal.fire("ToDo Added Successfully!", "", "success");
+      } else if (todoText === "") {
+        Swal.fire("Enter the Task!", "", "warning");
+      } else if (todos.length >= 5) {
+        Swal.fire("Complete the earlier Assigned Tasks!", "", "warning");
+      }
+    }
+
+    function removeTodo(index) {
+      if (index >= 0 && index < todos.length) {
+        todos.splice(index, 1);
+        Swal.fire("ToDo Deleted Successfully!", "", "success");
+        displayTodos();
+      }
+    }
+
+    loadTodos();
+  </script>
+</html>
